@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
+import { SubmittedDirective } from '../shared/submitted.directive';
+import { NotSubmittedDirective } from '../shared/not-submitted.directive';
 @Component({
   selector: 'app-assignments',
-  imports: [],
+  imports: [CommonModule, SubmittedDirective, NotSubmittedDirective],
   templateUrl: './assignments.component.html',
   styleUrl: './assignments.component.css'
 })
@@ -12,12 +14,12 @@ export class AssignmentsComponent {
     {
       name: "Assignment 1",
       dueDate: "2021-01-01",
-      submitted: false
+      submitted: true
     },
     {
       name: "Assignment 2",
       dueDate: "2021-02-01",
-      submitted: false
+      submitted: true
     },
     {
       name: "Assignment 3",
@@ -25,4 +27,8 @@ export class AssignmentsComponent {
       submitted: false
     }
   ];
+
+  getColor(a: any) {
+    return a.submitted ? 'lightgreen' : 'lightcoral';
+  }
 }

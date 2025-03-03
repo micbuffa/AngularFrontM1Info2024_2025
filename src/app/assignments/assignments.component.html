@@ -1,1 +1,36 @@
 <h2>{{title}}</h2>
+
+<ul>
+    @for(assignment of assignments; track assignment.name) {
+        @if(assignment.submitted) {
+        <li appSubmitted>
+            The assignement : {{assignment.name}} has been
+            submitted in time!
+        </li>
+        } @else {
+        <li appNotSubmitted>
+            The assignement : {{assignment.name}} is still due on
+            {{assignment.dueDate}}, NOT SUBMITTED YET!
+        </li>
+        }
+    }
+</ul>
+
+<table>
+    <thead>
+        <tr>
+            <th>Assignment</th>
+            <th>Due Date</th>
+            <th>Submitted</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(assignment of assignments; track assignment.name) {
+        <tr>
+            <td>{{assignment.name}}</td>
+            <td>{{assignment.dueDate}}</td>
+            <td>{{assignment.submitted}}</td>
+        </tr>
+        }
+    </tbody>
+</table>
