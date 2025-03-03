@@ -9,6 +9,9 @@ export class NotSubmittedDirective {
     el.nativeElement.style.backgroundColor = 'lightcoral';
     el.nativeElement.style.border = '1px solid red'; 
     el.nativeElement.style.color = 'yellow';
+
+    // you can also change the inner DOM of the component
+    //el.nativeElement.innerHTML += "TOTOTOTOTO";
   }
 
 }
