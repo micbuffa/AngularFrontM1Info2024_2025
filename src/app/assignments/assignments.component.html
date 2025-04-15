@@ -1,66 +1,39 @@
 <h2>{{title}}</h2>
-<h2>Add a new assignment</h2>
+<h3>Assignment list : </h3>
+<p>Number of documents : {{totalDocs}}</p>
+<p>Number of pages : {{totalPages}}</p>
+<p>Current page : {{page}}</p>
+<p>Number of documents per page : {{limit}}</p>
+<div>
+    <button mat-raised-button [disabled]="page === 1">FIRST PAGE</button>
+    &nbsp;
+    <button mat-raised-button [disabled]="!hasPrevPage">PREVIOUS PAGE</button>
+    &nbsp;
+    <button mat-raised-button [disabled]="!hasNextPage">NEXT PAGE</button>
+    &nbsp;
+    <button mat-raised-button [disabled]="page === totalPages">LAST PAGE</button>
+</div>
 
-<form ngForm #assignmentForm (submit)="addAssignment()">
-    <mat-form-field>
-        <input matInput
-            placeholder="Assignment Name"
-            name="name"
-            [(ngModel)]="assignmentName"
-            required>
-    </mat-form-field>  
-
-    <mat-form-field>
-        <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker"
-            placeholder="Choose a date"
-            name="dueDate"
-            [(ngModel)]="assignmentDueDate"
-            required
-        >
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      
-    <button mat-stroked-button 
-            color="primary" 
-        >
-    Add Assignment 
-    </button> 
-</form>
-
-<ul>
-    @for(assignment of assignments; track assignment.name) {
-        @if(assignment.submitted) {
-        <li appSubmitted>
-            The assignement : {{assignment.name}} has been
-            submitted in time!
-        </li>
-        } @else {
-        <li appNotSubmitted>
-            The assignement : {{assignment.name}} is still due on
-            {{assignment.dueDate}}, NOT SUBMITTED YET!
-        </li>
-        }
+<mat-list>
+   
+    @for(a of assignments; track a._id) {
+        <nav>
+            <a routerLink="/assignments/{{a._id}}">
+                <h3 mat-sub-header>{{a.dueDate | date:'d/M/YY'}}</h3> 
+                <p>{{a._id}}</p>
+                <div>
+                    @if(a.submitted) {
+                        <mat-list-item appRendu>
+                            Devoir initulé {{a.name}} a été rendu.
+                        </mat-list-item>
+                    } @else {
+                        <mat-list-item appNonRendu>
+                            le devoir {{a.name}} n'a pas été rendu!
+                        </mat-list-item>
+                    }
+                </div>
+                <mat-divider></mat-divider>
+            </a>
+        </nav>
     }
-</ul>
-
-<table>
-    <thead>
-        <tr>
-            <th>Assignment</th>
-            <th>Due Date</th>
-            <th>Submitted</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for(assignment of assignments; track assignment.name) {
-        <tr>
-            <td>{{assignment.name}}</td>
-            <td>{{assignment.dueDate}}</td>
-            <td>{{assignment.submitted}}</td>
-        </tr>
-        }
-    </tbody>
-</table>
+</mat-list>

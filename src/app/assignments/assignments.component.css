@@ -24,3 +24,10 @@ td {
     font-weight: bold;
     border : 1px solid red;
 }
+
+.form {
+    display:flex;
+    flex-direction: column;
+    margin:5px;
+ }
+ 

@@ -1,3 +1,10 @@
-<h1>{{title}}</h1>
-
-<app-assignments></app-assignments>
+<h1>
+    <nav>
+      <a routerLink="/home">{{title}}</a>
+    </nav>
+  </h1>
+  <button mat-raised-button (click)="populateDB();">POPULATE DB</button>
+  <!-- On va afficher le composant correspondant 
+       à la route active
+  -->
+  <router-outlet></router-outlet>
